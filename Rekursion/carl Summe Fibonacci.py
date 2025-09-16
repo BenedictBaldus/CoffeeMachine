@@ -1,4 +1,3 @@
-#nicht ganz rekusiv
 def f(n):
     if n==0:
         return 0
@@ -11,6 +10,7 @@ def f(n):
 l=[]
 eingabe =int(input("Zahl:"))
 for i in range (0,eingabe+1):
-    l.append(f(i))
-print(l)
-
+    if f(i) %2 == 0:
+        l.append(f(i))
+#print(l)
+print(sum(l))

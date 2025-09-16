@@ -1,18 +1,15 @@
 def f(n):
-    temp = 1
-    if n==0:
+    if n == 0:
         return 0
-    elif n==1:
+    elif n == 1:
         return 1
     else:
-            a=0
-            b=1
-            temp = b
-            b = b+a
-            return temp
-        
+        a, b = 0, 1
+        for _ in range(2, n + 1):
+            a, b = b, a + b
+        return b
 
 
-eingabe =int(input("Zahl:"))
-for i in range (0,eingabe+1):
+eingabe = int(input("Zahl: "))
+for i in range(eingabe + 1):
     print(f(i))
