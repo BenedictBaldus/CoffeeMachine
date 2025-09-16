@@ -6,7 +6,6 @@ print("Latte",Latte,"€",  "\nEspresso",Espresso,"€", "\nCappuccino",Cappucci
 while True:
   
   print("Bitte ein Getränk auswählen oder für das Ausschalten der Maschine 'off' eingeben\n  ")
-
   eingabe = input()
 
   if eingabe == "Latte" or eingabe == "latte":
