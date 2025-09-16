@@ -9,16 +9,16 @@ while True:
 
   eingabe = input()
 
-  if eingabe == "Latte":
+  if eingabe == "Latte" or eingabe == "latte":
     print("Hier ist der Latte")
     continue
-  elif eingabe == "Espresso":
+  elif eingabe == "Espresso" or eingabe == "espresso":
     print("Hier ist der Espresso")
     continue
-  elif eingabe == "Cappuccino":
+  elif eingabe == "Cappuccino" or eingabe == "cappuccino":
     print("Hier ist der Cappuccino")
     continue
-  elif eingabe == "ausschalten":
+  elif eingabe == "ausschalten" or eingabe == "Ausschalten":
     print("Kaffeemaschiene wird ausgeschaltet")
     break
   else:
