@@ -3,3 +3,4 @@ menu = {
   "Espresso":  3.0,
   "Cappuccino":  4.5,
 }
+print
