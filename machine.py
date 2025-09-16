@@ -1,5 +1,5 @@
-menu Coffee = {
-  "Latte": 5.0
-  "Espresso":  3.0
-  "Cappuccino":  4.5
+menu = {
+  "Latte": 5.0,
+  "Espresso":  3.0,
+  "Cappuccino":  4.5,
 }
