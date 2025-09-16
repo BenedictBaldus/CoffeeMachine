@@ -5,7 +5,7 @@ print("Latte",Latte,"€",  "\nEspresso",Espresso,"€", "\nCappuccino",Cappucci
 
 while True:
   
-  print("Bitte ein Getränk auswählen oder für abbruch 'ausschalten' eingeben\n  ")
+  print("Bitte ein Getränk auswählen oder für das Ausschalten der Maschine 'off' eingeben\n  ")
 
   eingabe = input()
 
@@ -18,7 +18,7 @@ while True:
   elif eingabe == "Cappuccino" or eingabe == "cappuccino":
     print("Hier ist der Cappuccino")
     continue
-  elif eingabe == "ausschalten" or eingabe == "Ausschalten":
+  elif eingabe == "off" or eingabe == "Off":
     print("Kaffeemaschiene wird ausgeschaltet")
     break
   else:
