@@ -9,7 +9,7 @@ def prüfen(zeile, spalte):
         if Brett[i][spalte] == 1:
             return False
     
-    i = zeile - 1, 
+    i = zeile - 1
     j = spalte - 1
     while i >= 0 and j >= 0:
         if Brett[i][j] == 1:
@@ -17,7 +17,7 @@ def prüfen(zeile, spalte):
         i -= 1
         j -= 1
     
-    i = zeile - 1, 
+    i = zeile - 1 
     j = spalte + 1
     while i >= 0 and j < 8:
         if Brett[i][j] == 1:
