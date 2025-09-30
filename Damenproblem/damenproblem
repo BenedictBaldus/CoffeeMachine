@@ -1,2 +1,74 @@
-def setzen()
+Brett = [
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0],
+]
+
+zeile = 0
+spalte = 0
+temp = 0
+anzahldamen = 0
+
+def setzen(zeile):
+    global spalte
+    spalte+=1
+
+    Brett[zeile][spalte] = 1
+    Brett
+    prüfen(zeile,spalte)
+
+
+def zurücksetzen():
+    setzen(zeile-1)
+
+def ausgabe():
+    for row in Brett:
+        print(" ".join(str(x) for x in row))
+    print("------------")
+    global anzahldamen
+    anzahldamen+=1
+    if(anzahldamen == 8):
+        print("Das Spiel ist vorbei")
+    else:
+        setzen(zeile+1)
+
+
+def prüfen(zeile, spalte):
+    #print("Wert",Brett[spalte][zeile])
+    #print("Spalte",spalte)
+    #print("Zeile",zeile)
+    zeile_möglich = False
+    spalte_möglich = False
+    möglich = False
+    while(zeile > 1):
+        #print("Zeile",zeile)
+        #print(Brett[spalte][zeile])
+        if(Brett[spalte][zeile] == 1):
+            zeile_möglich = True
+            break
+        zeile-=1
+
+    while(spalte > 1):
+        #print("Spalte",spalte)
+        if(Brett[spalte][zeile] == 1):
+            spalte_möglich = True
+            break
+        spalte-=1
+    while(spalte > 1 and zeile > 1):
+        #print("Diagonal")
+        if(Brett[spalte][zeile] == 1):
+            möglich = True
+            break
+        zeile-=1
+        spalte-=1
+    if(zeile_möglich == True and spalte_möglich == True and möglich == True):
+        return ausgabe()
+    return setzen(zeile)
+
+setzen(zeile)
     
