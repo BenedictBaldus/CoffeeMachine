@@ -17,11 +17,8 @@ coffe = { "Latte" : {                 #Preis in €, Wasser in ml, Coffe in mg, 
             "Oatmilk": 100
           } }
 
-for drink,preis in coffe.items():
-  print(f"{drink} kostet {preis["Preis"]}€")
-
 akzeptiere_muenzen = [0.1, 0.2, 0.5, 1.0, 2.0]
-
+  
 
 def ausgabe(drink):
   print("Werfen Sie bitte das Geld ein.")
@@ -38,24 +35,7 @@ def ausgabe(drink):
           if(sum(eingabe_coins)<price):                                                                                 #Prüfen ob die eingeworfenen Münzen zu wenig sind
             print("Das eingeworfene Geld reicht nicht aus, bitte mehr Geld einwerfen")
           elif(sum(eingabe_coins)>price):                                                                               #Prüfen ob die eingeworfenen Münzen zu viel sind
-            rueckgeld=round(sum(eingabe_coins)-price, 2)
-            print(f"Sie bekommen {rueckgeld}€ Rückgeld")
-            while rueckgeld>0:
-              if rueckgeld>= 2.0:
-                rueckgeld = round(rueckgeld -2.0, 2)
-                print("Es werden 2.0€ ausgegeben")
-              elif rueckgeld>=1.0:
-                rueckgeld = round(rueckgeld -1.0, 2)
-                print("Es werden 1.0€ ausgegeben")
-              elif rueckgeld>=0.5:
-                rueckgeld = round(rueckgeld -0.5, 2)
-                print("Es werden 0.5€ ausgegeben")
-              elif rueckgeld>=0.2:
-                rueckgeld = round(rueckgeld -0.2, 2)
-                print("Es werden 0.2€ ausgegeben")
-              elif rueckgeld>=0.1:
-                rueckgeld = round(rueckgeld -0.1, 2)
-                print("Es werden 0.1€ ausgegeben")
+            rueckgeld(rueckgeld,price)
             break
           else:
             break 
@@ -64,31 +44,52 @@ def ausgabe(drink):
           print("Ungültige Münze, es werden nur 0.1,0.2,0.5,1 oder 2 Euro Münzen akzeptiert.")                          #Ausgabe das ungültige Münzen eingeworfen wurden
           continue
 
-
+def rueckgeld(rueckgeld,price):
+  rueckgeld=round(sum(eingabe_coins)-price, 2)
+  print(f"Sie bekommen {rueckgeld}€ Rückgeld")
+  while rueckgeld>0:
+    if rueckgeld>= 2.0:
+      rueckgeld = round(rueckgeld -2.0, 2)
+      print("Es werden 2.0€ ausgegeben")
+    elif rueckgeld>=1.0:
+      rueckgeld = round(rueckgeld -1.0, 2)
+      print("Es werden 1.0€ ausgegeben")
+    elif rueckgeld>=0.5:
+      rueckgeld = round(rueckgeld -0.5, 2)
+      print("Es werden 0.5€ ausgegeben")
+    elif rueckgeld>=0.2:
+      rueckgeld = round(rueckgeld -0.2, 2)
+      print("Es werden 0.2€ ausgegeben")
+    elif rueckgeld>=0.1:
+      rueckgeld = round(rueckgeld -0.1, 2)
+      print("Es werden 0.1€ ausgegeben")
 
 
 while True:
   eingabe_coins = []
+  count = 1
+  for drink,preis in coffe.items():
+    print(f"{count}: {drink} kostet {preis["Preis"]}€")
+    count+=1
   print("\nBitte ein Getränk auswählen oder für das Ausschalten der Maschine 'off' eingeben\n  ")
   eingabe = input()
-
-  if eingabe == "Latte" or eingabe == "latte":
-    ausgabe("Latte")
-    print("Der Latte wird ausgegeben")
-    continue
-  elif eingabe == "Espresso" or eingabe == "espresso":
-    ausgabe("Espresso")
-    print("Der Espresso wird ausgegeben")
-    continue
-  elif eingabe == "Cappuccino" or eingabe == "cappuccino":
-    ausgabe("Cappucino")
-    print("Der Cappuccino wird ausgegeben")
-    continue
-  elif eingabe == "off" or eingabe == "Off":
+  if eingabe.lower() == "off":
     print("Kaffeemaschiene wird ausgeschaltet")
     break
-  else:
-    print("Fehlerhafte Eingabe, bitte erneut probieren")
-    continue
 
+  match eingabe:
+    case "1":
+      ausgabe("Latte")
+      print("Der Latte wird ausgegeben")
+    case "2":
+      ausgabe("Espresso")
+      print("Der Espresso wird ausgegeben")
+    case "3":
+      ausgabe("Cappucino")
+      print("Der Cappuccino wird ausgegeben")
+    case _:
+      print("Fehlerhafte Eingabe, bitte erneut probieren")
+      continue
+
+  
   
