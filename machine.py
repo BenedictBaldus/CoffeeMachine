@@ -1,4 +1,4 @@
-coffe = { "Latte" : {                 #Preis in €, Wasser in ml, Coffe in mg, Oatmilk in ml
+coffe = { "Latte Macchiato" : {                 #Preis in €, Wasser in ml, Coffe in mg, Oatmilk in ml
             "Preis" : 5.0,
             "Water" : 100,
             "Coffe" : 25,
@@ -79,14 +79,17 @@ while True:
 
   match eingabe:
     case "1":
-      ausgabe("Latte")
-      print("Der Latte wird ausgegeben")
+      print("Es wurde der Latte Macchiato gewählt")
+      ausgabe("Latte Macchiato")
+      print("Der Latte Macchiato wird ausgegeben\n ")
     case "2":
+      print("Es wurde der Espresso gewählt")
       ausgabe("Espresso")
-      print("Der Espresso wird ausgegeben")
+      print("Der Espresso wird ausgegeben\n ")
     case "3":
-      ausgabe("Cappucino")
-      print("Der Cappuccino wird ausgegeben")
+      print("Es wurde der Cappucino gewählt")
+      ausgabe("Cappuccino")
+      print("Der Cappuccino wird ausgegeben\n ")
     case _:
       print("Fehlerhafte Eingabe, bitte erneut probieren")
       continue
