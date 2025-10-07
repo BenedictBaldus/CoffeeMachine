@@ -34,13 +34,30 @@ def ausgabe(drink):
         
         if temp_eingabe in akzeptiere_muenzen:                                                                      #Prüfen ob die eingegebenen Münzen akzeptiert werden
           eingabe_coins.append(temp_eingabe)                                                                            
-          print("Die Summe ist",sum(eingabe_coins))
+          print("Die Summe ist",round(sum(eingabe_coins),2))
 
           if(sum(eingabe_coins)<price):                                                                                 #Prüfen ob die eingeworfenen Münzen zu wenig sind
             print("Das eingeworfene Geld reicht nicht aus, bitte mehr Geld einwerfen")
           elif(sum(eingabe_coins)>price):                                                                               #Prüfen ob die eingeworfenen Münzen zu viel sind
-            rueckgeld=sum(eingabe_coins)-price
-            print("Es wurde zuviel gezahlt, es werden",rueckgeld,"€ ausgegeben")
+            rueckgeld=round(sum(eingabe_coins)-price, 2)
+            print(rueckgeld)
+            while rueckgeld>0:
+              match rueckgeld:
+                case g if rueckgeld>= 2.0:
+                  rueckgeld = round(rueckgeld -2.0, 2)
+                  print("Es werden 2.0€ ausgegeben")
+                case g if rueckgeld>=1.0:
+                  rueckgeld = round(rueckgeld -1.0, 2)
+                  print("Es werden 1.0€ ausgegeben")
+                case g if rueckgeld>=0.5:
+                  rueckgeld = round(rueckgeld -0.5, 2)
+                  print("Es werden 0.5€ ausgegeben")
+                case g if rueckgeld>=0.2:
+                  rueckgeld = round(rueckgeld -0.2, 2)
+                  print("Es werden 0.2€ ausgegeben")
+                case g if rueckgeld>=0.1:
+                  rueckgeld = round(rueckgeld -0.1, 2)
+                  print("Es werden 0.1€ ausgegeben")
             break
           else:
             break 
