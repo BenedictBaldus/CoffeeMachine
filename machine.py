@@ -42,22 +42,21 @@ def ausgabe(drink):
             rueckgeld=round(sum(eingabe_coins)-price, 2)
             print(rueckgeld)
             while rueckgeld>0:
-              match rueckgeld:
-                case g if rueckgeld>= 2.0:
-                  rueckgeld = round(rueckgeld -2.0, 2)
-                  print("Es werden 2.0€ ausgegeben")
-                case g if rueckgeld>=1.0:
-                  rueckgeld = round(rueckgeld -1.0, 2)
-                  print("Es werden 1.0€ ausgegeben")
-                case g if rueckgeld>=0.5:
-                  rueckgeld = round(rueckgeld -0.5, 2)
-                  print("Es werden 0.5€ ausgegeben")
-                case g if rueckgeld>=0.2:
-                  rueckgeld = round(rueckgeld -0.2, 2)
-                  print("Es werden 0.2€ ausgegeben")
-                case g if rueckgeld>=0.1:
-                  rueckgeld = round(rueckgeld -0.1, 2)
-                  print("Es werden 0.1€ ausgegeben")
+              if rueckgeld>= 2.0:
+                rueckgeld = round(rueckgeld -2.0, 2)
+                print("Es werden 2.0€ ausgegeben")
+              elif rueckgeld>=1.0:
+                rueckgeld = round(rueckgeld -1.0, 2)
+                print("Es werden 1.0€ ausgegeben")
+              elif rueckgeld>=0.5:
+                rueckgeld = round(rueckgeld -0.5, 2)
+                print("Es werden 0.5€ ausgegeben")
+              elif rueckgeld>=0.2:
+                rueckgeld = round(rueckgeld -0.2, 2)
+                print("Es werden 0.2€ ausgegeben")
+              elif rueckgeld>=0.1:
+                rueckgeld = round(rueckgeld -0.1, 2)
+                print("Es werden 0.1€ ausgegeben")
             break
           else:
             break 
