@@ -18,13 +18,12 @@ coffe = { "Latte" : {                 #Preis in €, Wasser in ml, Coffe in mg, 
           } }
 
 for drink,preis in coffe.items():
-  print(drink, "kostet", preis["Preis"],"€")
+  print(f"{drink} kostet {preis["Preis"]}€")
 
 akzeptiere_muenzen = [0.1, 0.2, 0.5, 1.0, 2.0]
 
 
 def ausgabe(drink):
-  print(coffe[drink]["Preis"])
   print("Werfen Sie bitte das Geld ein.")
   price = coffe[drink]["Preis"]
 
@@ -34,13 +33,13 @@ def ausgabe(drink):
         
         if temp_eingabe in akzeptiere_muenzen:                                                                      #Prüfen ob die eingegebenen Münzen akzeptiert werden
           eingabe_coins.append(temp_eingabe)                                                                            
-          print("Die Summe ist",round(sum(eingabe_coins),2))
+          print(f"Es wurden {round(sum(eingabe_coins),2)}€ eingeworfen.")
 
           if(sum(eingabe_coins)<price):                                                                                 #Prüfen ob die eingeworfenen Münzen zu wenig sind
             print("Das eingeworfene Geld reicht nicht aus, bitte mehr Geld einwerfen")
           elif(sum(eingabe_coins)>price):                                                                               #Prüfen ob die eingeworfenen Münzen zu viel sind
             rueckgeld=round(sum(eingabe_coins)-price, 2)
-            print(rueckgeld)
+            print(f"Sie bekommen {rueckgeld}€ Rückgeld")
             while rueckgeld>0:
               if rueckgeld>= 2.0:
                 rueckgeld = round(rueckgeld -2.0, 2)
