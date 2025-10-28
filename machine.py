@@ -16,6 +16,18 @@ coffe = { "Latte Macchiato" : {                 #Preis in €, Wasser in ml, Cof
             "Coffe" : 25,
             "Oatmilk": 100
           } }
+#Ressources
+water = 2000 # in ml
+grinder =500 # in g
+oatmilk = 1000 # in ml
+
+cashdrawer= {
+"10 Cent" : 10,
+"20 Cent" : 10,
+"50 Cent" : 10,
+"1 Euro" : 10,
+"2 Euro" : 10,
+}
 
 akzeptiere_muenzen = [0.1, 0.2, 0.5, 1.0, 2.0]
   
@@ -27,7 +39,20 @@ def ausgabe(drink):
   while sum(eingabe_coins)<price:
       while True:
         temp_eingabe = float(input())
-        
+        if temp_eingabe == 2.0:
+          cashdrawer.update({"2 Euro": cashdrawer["2 Euro"]+1})
+        elif temp_eingabe == 1.0:
+          cashdrawer.update({"1 Euro": cashdrawer["1 Euro"]+1})
+        elif temp_eingabe == 0.5:
+          cashdrawer.update({"50 Cent": cashdrawer["50 Cent"]+1})
+        elif temp_eingabe == 0.2:
+          cashdrawer.update({"20 Cent": cashdrawer["20 Cent"]+1})
+        elif temp_eingabe == 0.1:
+          cashdrawer.update({"10 Cent": cashdrawer["10 Cent"]+1})
+      
+
+
+
         if temp_eingabe in akzeptiere_muenzen:                                                                      #Prüfen ob die eingegebenen Münzen akzeptiert werden
           eingabe_coins.append(temp_eingabe)                                                                            
           print(f"Es wurden {round(sum(eingabe_coins),2)}€ eingeworfen.")
@@ -43,6 +68,12 @@ def ausgabe(drink):
         else:
           print("Ungültige Münze, es werden nur 0.1,0.2,0.5,1 oder 2 Euro Münzen akzeptiert.")                          #Ausgabe das ungültige Münzen eingeworfen wurden
           continue
+
+def report():
+  print("Wasser", water)
+  print("Milch", oatmilk)
+  print("Kaffe", grinder)
+  print(cashdrawer)
 
 def rueckgeld(rueckgeld,price):
   rueckgeld=round(sum(eingabe_coins)-price, 2)
@@ -63,7 +94,18 @@ def rueckgeld(rueckgeld,price):
     elif rueckgeld>=0.1:
       rueckgeld = round(rueckgeld -0.1, 2)
       print("Es werden 0.1€ ausgegeben")
-
+def ressourcen(drink):
+  global water
+  global oatmilk
+  global grinder
+  if((water-coffe[drink]["Water"])>0 and (oatmilk - coffe[drink]["Oatmilk"])>0 and (grinder - coffe[drink]["Coffe"])>0):
+    water = water - coffe[drink]["Water"]
+    oatmilk = oatmilk - coffe[drink]["Oatmilk"]
+    grinder = grinder - coffe[drink]["Coffe"]
+    print(f"Der {drink} wird ausgegeben\n ")
+    
+  else:
+    print("Bitte Ressourcen nachfüllen")
 
 while True:
   eingabe_coins = []
@@ -79,17 +121,23 @@ while True:
 
   match eingabe:
     case "1":
-      print("Es wurde der Latte Macchiato gewählt")
-      ausgabe("Latte Macchiato")
-      print("Der Latte Macchiato wird ausgegeben\n ")
+      drink = "Latte Macchiato"
+      print(f"Es wurde der {drink} gewählt")
+      ausgabe(drink)
+      ressourcen(drink)
+      
     case "2":
-      print("Es wurde der Espresso gewählt")
-      ausgabe("Espresso")
-      print("Der Espresso wird ausgegeben\n ")
+      drink = "Espresso"
+      print(f"Es wurde der {drink} gewählt")
+      ausgabe(drink)
+      ressourcen(drink)
+      
     case "3":
-      print("Es wurde der Cappucino gewählt")
-      ausgabe("Cappuccino")
-      print("Der Cappuccino wird ausgegeben\n ")
+      drink = "Cappucino"
+      print(f"Es wurde der {drink} gewählt")
+      ausgabe(drink)
+      ressourcen(drink)
+      
     case _:
       print("Fehlerhafte Eingabe, bitte erneut probieren")
       continue
