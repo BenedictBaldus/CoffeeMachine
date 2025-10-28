@@ -17,9 +17,11 @@ def quicksort(arr,start,ende):
             j -= 1
         if i < j:
             arr[i], arr[j] = arr[j], arr[i]
-            print(arr) 
+            print(arr)
+            #print("Werte tauschen",arr) 
     
     arr[start], arr[j] = arr[j], arr[start]
+    #print("Pivot verschieben", arr)
     print(arr)
     quicksort(arr, start, j - 1)
     quicksort(arr, j + 1, ende)
