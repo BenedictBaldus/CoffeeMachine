@@ -1,9 +1,11 @@
 import random
 
 list=[]
-for i in range (0,10):
+for i in range (0,13):
     list.append(random.randint(1,100))
 print("Unsortiert", list)
+
+
 def quicksort(arr,start,ende):
     if start >= ende:
         return
