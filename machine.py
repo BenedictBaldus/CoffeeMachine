@@ -99,6 +99,10 @@ def report():
   
 
 def replenish():
+  global water
+  global grinder
+  global oatmilk
+  
   water = 2000 # in ml
   grinder = 500 # in g
   oatmilk = 1000 # in ml
