@@ -25,7 +25,7 @@ def einfuegen_einzelwert(root, wert):
 
 
 def einfuegen_liste(root, wert_liste):
-    print(f"Füge die folgende Liste in den Baum ein: {wert_liste}")
+    #print(f"Füge die folgende Liste in den Baum ein: {wert_liste}")
     
     for wert in wert_liste:
         root = einfuegen_einzelwert(root, wert)
@@ -43,20 +43,18 @@ def inorder_traversal(root):
 
 # AUSFÜHRUNG
 
-if __name__ == "__main__":
-
     
-    bst_root = None
+bst_root = None
     
-    meine_werte = [35, 17, 88 ,93, 91, 12, 8, 47, 58, 32, 1, 69, 62, 74, 99, 23, 18, 11]
+meine_werte = [35, 17, 88 ,93, 91, 12, 8, 47, 58, 32, 1, 69, 62, 74, 99, 23, 18, 11]
     
-    bst_root = einfuegen_liste(bst_root, meine_werte)
+bst_root = einfuegen_liste(bst_root, meine_werte)
     
-    print("\nBaum erfolgreich erstellt.")
+#print("\nBaum erfolgreich erstellt.")
     
-    print("In-order Traversal (sollte sortiert sein):")
-    inorder_traversal(bst_root)
-    print() 
+print("In-order:")
+inorder_traversal(bst_root)
+print() 
 
 
 

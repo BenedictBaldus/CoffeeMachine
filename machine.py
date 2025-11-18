@@ -51,7 +51,7 @@ def ausgabe(drink):
           cashdrawer.update({"10 Cent": cashdrawer["10 Cent"]+1})
       
 
-
+        
 
         if temp_eingabe in akzeptiere_muenzen:                                                                      #Prüfen ob die eingegebenen Münzen akzeptiert werden
           eingabe_coins.append(temp_eingabe)                                                                            
@@ -61,8 +61,10 @@ def ausgabe(drink):
             print("Das eingeworfene Geld reicht nicht aus, bitte mehr Geld einwerfen")
           elif(sum(eingabe_coins)>price):                                                                               #Prüfen ob die eingeworfenen Münzen zu viel sind
             rueckgeld(rueckgeld,price)
+            print("He",eingabe_coins)
             break
           else:
+            print("Ho",eingabe_coins)
             break 
 
         else:
