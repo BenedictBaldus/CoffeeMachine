@@ -19,7 +19,7 @@ coffe = { "Latte Macchiato" : {                 #Preis in €, Wasser in ml, Cof
           } }
 #Ressources
 water = 2000 # in ml
-grinder = 500 # in g
+grinder = 50 # in g
 oatmilk = 1000 # in ml
 einnahmen = 0
 cashdrawer= {
@@ -83,19 +83,19 @@ def einwurf_muenzen(drink):
 
 def report():
   global einnahmen
-  print(f"Wasser {water}")
-  print(f"Milch {oatmilk}")
-  print(f"Kaffe {grinder}")
+  print(f"Wasser {water} ml")
+  print(f"Milch {oatmilk} ml")
+  print(f"Kaffe {grinder} g")
   
-  print(f"Einnahmen {einnahmen}\n")
+  print(f"Einnahmen {einnahmen} €\n")
 
   report_name = "report.txt"
   with open(report_name, "w") as datObj:
   #datObj = open(report_name, "w")
-    datObj.write(f"Wasser: {water}\n")
-    datObj.write(f"Milch: {oatmilk}\n")
-    datObj.write(f"Kaffe: {grinder}\n")
-    datObj.write(f"Einnahmen: {einnahmen}\n")
+    datObj.write(f"Wasser: {water} ml\n")
+    datObj.write(f"Milch: {oatmilk} ml\n")
+    datObj.write(f"Kaffe: {grinder} mg\n")
+    datObj.write(f"Einnahmen: {einnahmen} €\n")
   
 
 def replenish():
