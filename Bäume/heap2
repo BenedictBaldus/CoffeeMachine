@@ -1,0 +1,58 @@
+def Heapsort(array, n):
+    # Sicherstellen, dass n korrekt ist
+    if n <= 1:
+        return
+
+    # Elternknoten (Integer-Division statt round)
+    parent_index = n // 2 - 1
+    parent = array[parent_index]
+
+    # Kindknoten
+    child_left_index = n - 2
+    child_right_index = n - 1
+
+    child_left = array[child_left_index]
+    child_right = array[child_right_index]
+
+    #print(parent, child_left, child_right)
+
+    # Linkes Kind größer?
+    if child_left > parent:
+        array[parent_index], array[child_left_index] = array[child_left_index], array[parent_index]
+
+    # Eltern neu lesen
+    parent = array[parent_index]
+
+    # Rechtes Kind größer?
+    if child_right > parent:
+        array[parent_index], array[child_right_index] = array[child_right_index], array[parent_index]
+
+    print(array)
+
+    # Rekursion für Heap-Bau
+    if n > 2:
+        next_n = (n // 2) if n % 2 == 0 else (n // 2 + 1)
+        Heapsort(array, next_n)
+
+    else:
+        # Letzter Swap: größtes Element ans Ende
+        array[0], array[-1] = array[-1], array[0]
+        print(array)
+
+        global sortiert
+        sortiert.insert(0, array[-1])
+
+        array.pop()
+        print("sort", sortiert)
+
+        # Rekursion mit n-1
+        if len(array) > 1:
+            Heapsort(array, len(array))
+
+
+werte = [57, 16, 62, 30, 80, 7, 21, 78, 41]
+sortiert = []
+laenge = len(werte)
+
+print(werte)
+Heapsort(werte, laenge)
