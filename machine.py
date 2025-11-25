@@ -1,27 +1,33 @@
 import datetime
+import csv
+
 coffe = { "Latte Macchiato" : {                 #Preis in €, Wasser in ml, Coffe in mg, Oatmilk in ml
-            "Preis" : 5.0,
+            "Preis" : 10.0,
             "Water" : 100,
             "Coffe" : 25,
             "Oatmilk": 250
           },
           "Espresso" : {
-            "Preis" : 3.0,
+            "Preis" : 10.0,
             "Water" : 50,
             "Coffe" : 20,
             "Oatmilk": 0
           },
           "Cappuccino" : {
-            "Preis" : 4.5,
+            "Preis" : ,
             "Water" : 250,
             "Coffe" : 25,
             "Oatmilk": 100
           } }
+
+csv_coffe = {}
+
 #Ressources
 water = 2000 # in ml
 grinder = 50 # in g
 oatmilk = 1000 # in ml
 einnahmen = 0
+
 cashdrawer= {
 "10 Cent" : 10,
 "20 Cent" : 10,
@@ -32,7 +38,6 @@ cashdrawer= {
 
 akzeptiere_muenzen = [0.1, 0.2, 0.5, 1.0, 2.0]
   
-
 def einwurf_muenzen(drink):
   print("Werfen Sie bitte das Geld ein.")
   price = coffe[drink]["Preis"]
@@ -97,7 +102,6 @@ def report():
     datObj.write(f"Kaffe: {grinder} mg\n")
     datObj.write(f"Einnahmen: {einnahmen} €\n")
   
-
 def replenish():
   global water
   global grinder
@@ -109,7 +113,6 @@ def replenish():
   timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
   with open("log.txt", "a") as datObj:
     datObj.write(f"{timestamp} Replenished\r\n")
-
 
 def rueckgeld(rueckgeld,price):
   global einnahmen
@@ -158,6 +161,17 @@ def ressourcen(drink):
   else:
     print("\nBitte Ressourcen nachfüllen\n")
 
+try:
+  with open("coffe.csv","r") as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+              print(row)     
+except:
+  print("Error: Datei nicht vorhanden. Es werden die Default Werte verwendet")
+
+
+
+
 while True:
   eingabe_coins = []
   count = 1
@@ -184,7 +198,6 @@ while True:
       drink = "Espresso"
       print(f"Es wurde der {drink} gewählt")
       einwurf_muenzen(drink)
-      
       
     case "3":
       drink = "Cappucino"
