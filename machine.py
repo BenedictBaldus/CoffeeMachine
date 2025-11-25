@@ -20,9 +20,15 @@ coffe = { "Latte Macchiato" : {                 #Preis in €, Wasser in ml, Cof
             "Oatmilk": 100
           } }
 
-csv_coffe = {}
+#csv_coffe = {}
 
 #Ressources
+ressources = {
+  "Wasser" : 2000,
+  "Kaffee" :50,
+  "Milch" : 1000,
+}
+
 water = 2000 # in ml
 grinder = 50 # in g
 oatmilk = 1000 # in ml
@@ -88,32 +94,45 @@ def einwurf_muenzen(drink):
 
 def report():
   global einnahmen
-  print(f"Wasser {water} ml")
-  print(f"Milch {oatmilk} ml")
-  print(f"Kaffe {grinder} g")
+  print(f"Wasser {ressources["Wasser"]} ml")
+  print(f"Milch {ressources["Milch"]} ml")
+  print(f"Kaffee {ressources["Kaffee"]} g")
   
   print(f"Einnahmen {einnahmen} €\n")
 
   report_name = "report.txt"
-  with open(report_name, "w") as datObj:
-  #datObj = open(report_name, "w")
-    datObj.write(f"Wasser: {water} ml\n")
-    datObj.write(f"Milch: {oatmilk} ml\n")
-    datObj.write(f"Kaffe: {grinder} mg\n")
-    datObj.write(f"Einnahmen: {einnahmen} €\n")
+  try:
+    with open(report_name, "w") as datObj:
+    #datObj = open(report_name, "w")
+      datObj.write(f"Wasser: {ressources["Wasser"]} ml\n")
+      datObj.write(f"Milch: {ressources["Milch"]} ml\n")
+      datObj.write(f"Kaffee: {ressources["Kaffee"]} mg\n")
+      datObj.write(f"Einnahmen: {einnahmen} €\n")
+  except:
+    print("Fehler beim schreiben der Report Datei")
+ 
+def off():
+
+  try:
+    with open("ressources.csv", "w", newline="") as csvfile:
+      writer = csv.writer(csvfile, delimiter= ',', quotechar='"')
+      fieldnames = ["ressource","quantity"]
+      writer.writerow(fieldnames)
+      for i in ressources.items():
+        writer.writerow(i)
+      for i in cashdrawer.items():
+        writer.writerow(i)
+  except:
+    print("Fehler beim schreiben der Report CSV")
   
 def replenish():
-  global water
-  global grinder
-  global oatmilk
-  
-  water = 2000 # in ml
-  grinder = 500 # in g
-  oatmilk = 1000 # in ml
+  ressources["Wasser"] = 2000
+  ressources["Milch"] = 1000
+  ressources["Kaffee"] = 500
+
   timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
   with open("log.txt", "a") as datObj:
     datObj.write(f"{timestamp} Replenished\r\n")
-
 def rueckgeld(rueckgeld,price):
   global einnahmen
   rueckgeld=round(sum(eingabe_coins)-price, 2)
@@ -147,69 +166,103 @@ def rueckgeld(rueckgeld,price):
     else:
       print("Nicht genügend Rückgeld vorhanden")
       break
-
 def ressourcen(drink):
   global water
   global oatmilk
   global grinder
-  if((water-coffe[drink]["Water"])>0 and (oatmilk - coffe[drink]["Oatmilk"])>0 and (grinder - coffe[drink]["Coffe"])>0):
-    water = water - coffe[drink]["Water"]
-    oatmilk = oatmilk - coffe[drink]["Oatmilk"]
-    grinder = grinder - coffe[drink]["Coffe"]
+  if((ressources["Wasser"]-coffe[drink]["Water"])>0 and (ressources["Milch"] - coffe[drink]["Oatmilk"])>0 and (ressources["Kaffee"] - coffe[drink]["Coffe"])>0):
+    ressources["Wasser"] = ressources["Wasser"]-coffe[drink]["Water"]
+    ressources["Milch"] = ressources["Milch"] - coffe[drink]["Oatmilk"]
+    ressources["Kaffee"] = ressources["Kaffee"] - coffe[drink]["Coffe"]
     print(f"\nDer {drink} wird ausgegeben\n ")
     
   else:
     print("\nBitte Ressourcen nachfüllen\n")
+def einlesen():
+  global water
+  global oatmilk
+  global grinder
+  global cashdrawer
 
-##Einlesen CSV für die Preise
-try:
-  with open("coffe.csv","r") as csvfile:
-            reader = csv.DictReader(csvfile)
-            for row in reader:
-              #print(row) 
-              coffe[row["speciality"]]["Preis"] = float(row["price"])
-except:
-  print("Error: Datei nicht  oder fehlerhaft. Es werden die Default Werte verwendet")
+  ##Einlesen CSV für die Preise
+  try:
+    with open("coffe.csv","r") as csvfile:
+              reader = csv.DictReader(csvfile)
+              for row in reader:
+                #print(row) 
+                coffe[row["speciality"]]["Preis"] = float(row["price"])
+                coffe[row["speciality"]]["Water"] = float(row["water"])
+                coffe[row["speciality"]]["Coffe"] = float(row["coffe"])
+                coffe[row["speciality"]]["oatmilk"] = float(row["oatmilk"])
+  except:
+    print("Error: Datei coffe.csv ist nicht vorhanden oder fehlerhaft. Es werden die Default Werte verwendet")
+
+
+  try:
+    with open("ressources.csv","r") as csvfile:
+              reader = csv.DictReader(csvfile)
+              for row in reader:
+                #print(row) 
+                if row["ressource"] == "Wasser":
+                  ressources["Wasser"] = int(row["quantity"])
+                  #water = int(row["quantity"])
+                elif row["ressource"] == "Milch":
+                  ressources["Milch"] = int(row["quantity"])
+                  #oatmilk = int(row["quantity"])
+                elif row["ressource"] == "Kaffee":
+                  ressources["Kaffee"] = int(row["quantity"])
+                  #grinder = int(row["quantity"])
+                else:
+                  cashdrawer[row["ressource"]] = int(row["quantity"])
+  except:
+    print("Error: Datei ressources.csv ist nicht vorhanden oder Fehlerhaft. Es werden keine Ressourcen eingelesen")
+
+
+einlesen()
+print(f"Wasser {ressources["Wasser"]} ml")
+print(f"Milch {ressources["Milch"]} ml")
+print(f"Kaffee {ressources["Kaffee"]} g")
 
 while True:
-  eingabe_coins = []
-  count = 1
-  print()
-  for drink,preis in coffe.items():
-    print(f"{count}: {drink} kostet {preis["Preis"]}€")
-    count+=1
-  print("\nBitte ein Getränk auswählen oder für das Ausschalten der Maschine 'off'. Für den Report 'report' oder für das Nachfüllen 'replenish' ein. \n  ")
-  eingabe = input().lower()
-  
-  match eingabe:
-      case "1":
-        drink = "Latte Macchiato"
-        print(f"Es wurde der {drink} gewählt")
-        einwurf_muenzen(drink)
-        
-      case "2":
-        drink = "Espresso"
-        print(f"Es wurde der {drink} gewählt")
-        einwurf_muenzen(drink)
-        
-      case "3":
-        drink = "Cappucino"
-        print(f"Es wurde der {drink} gewählt")
-        einwurf_muenzen(drink)
-        
-      case "off":
-        print("Kaffeemaschiene wird ausgeschaltet")
-        break
+    eingabe_coins = []
+    count = 1
+    print()
+    for drink,preis in coffe.items():
+      print(f"{count}: {drink} kostet {preis["Preis"]}€")
+      count+=1
+    print("\nBitte ein Getränk auswählen oder für das Ausschalten der Maschine 'off'. Für den Report 'report' oder für das Nachfüllen 'replenish' ein. \n  ")
+    eingabe = input().lower()
+    
+    match eingabe:
+        case "1":
+          drink = "Latte Macchiato"
+          print(f"Es wurde der {drink} gewählt")
+          einwurf_muenzen(drink)
+          
+        case "2":
+          drink = "Espresso"
+          print(f"Es wurde der {drink} gewählt")
+          einwurf_muenzen(drink)
+          
+        case "3":
+          drink = "Cappucino"
+          print(f"Es wurde der {drink} gewählt")
+          einwurf_muenzen(drink)
+          
+        case "off":
+          print("Kaffeemaschiene wird ausgeschaltet")
+          off()
+          break
 
-      case "report":
-        report()
+        case "report":
+          report()
 
-      case "replenish":
-        replenish()
-  
-      case _:
-        print("Fehlerhafte Eingabe, bitte erneut probieren\n")
-        continue
+        case "replenish":
+          replenish()
+    
+        case _:
+          print("Fehlerhafte Eingabe, bitte erneut probieren\n")
+          continue
 
   
-  
+
