@@ -1,0 +1,4 @@
+Wasser: 900.0 ml
+Milch: 750 ml
+Kaffee: 25.0 mg
+Einnahmen: 5.0 €
