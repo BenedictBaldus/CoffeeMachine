@@ -14,7 +14,7 @@ coffe = { "Latte Macchiato" : {                 #Preis in €, Wasser in ml, Cof
             "Oatmilk": 0
           },
           "Cappuccino" : {
-            "Preis" : ,
+            "Preis" : 10.0,
             "Water" : 250,
             "Coffe" : 25,
             "Oatmilk": 100
@@ -74,7 +74,7 @@ def einwurf_muenzen(drink):
             print(f"Es wurden {round(sum(eingabe_coins),2)}€ eingeworfen.")
 
             if(sum(eingabe_coins)<price):                                                                                 #Prüfen ob die eingeworfenen Münzen zu wenig sind
-              print("Das eingeworfene Geld reicht nicht aus, bitte mehr Geld einwerfen. Oder für Abbrechen 'Abruch' eingeben")
+              print("Das eingeworfene Geld reicht nicht aus, bitte mehr Geld einwerfen. Oder für Abbrechen 'Abbruch' eingeben")
             elif(sum(eingabe_coins)>price):                                                                               #Prüfen ob die eingeworfenen Münzen zu viel sind
               rueckgeld(rueckgeld,price)
               ressourcen(drink)
@@ -161,52 +161,55 @@ def ressourcen(drink):
   else:
     print("\nBitte Ressourcen nachfüllen\n")
 
+##Einlesen CSV für die Preise
 try:
   with open("coffe.csv","r") as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
-              print(row)     
+              #print(row) 
+              coffe[row["speciality"]]["Preis"] = float(row["price"])
 except:
-  print("Error: Datei nicht vorhanden. Es werden die Default Werte verwendet")
-
-
-
+  print("Error: Datei nicht  oder fehlerhaft. Es werden die Default Werte verwendet")
 
 while True:
   eingabe_coins = []
   count = 1
+  print()
   for drink,preis in coffe.items():
     print(f"{count}: {drink} kostet {preis["Preis"]}€")
     count+=1
   print("\nBitte ein Getränk auswählen oder für das Ausschalten der Maschine 'off'. Für den Report 'report' oder für das Nachfüllen 'replenish' ein. \n  ")
-  eingabe = input()
-  if eingabe.lower() == "off":
-    print("Kaffeemaschiene wird ausgeschaltet")
-    break
-  elif eingabe.lower() == "report":
-    report()
-  elif eingabe.lower() == "replenish":
-    replenish()
-
+  eingabe = input().lower()
+  
   match eingabe:
-    case "1":
-      drink = "Latte Macchiato"
-      print(f"Es wurde der {drink} gewählt")
-      einwurf_muenzen(drink)
-      
-    case "2":
-      drink = "Espresso"
-      print(f"Es wurde der {drink} gewählt")
-      einwurf_muenzen(drink)
-      
-    case "3":
-      drink = "Cappucino"
-      print(f"Es wurde der {drink} gewählt")
-      einwurf_muenzen(drink)
-      
-    case _:
-      print("Fehlerhafte Eingabe, bitte erneut probieren\n")
-      continue
+      case "1":
+        drink = "Latte Macchiato"
+        print(f"Es wurde der {drink} gewählt")
+        einwurf_muenzen(drink)
+        
+      case "2":
+        drink = "Espresso"
+        print(f"Es wurde der {drink} gewählt")
+        einwurf_muenzen(drink)
+        
+      case "3":
+        drink = "Cappucino"
+        print(f"Es wurde der {drink} gewählt")
+        einwurf_muenzen(drink)
+        
+      case "off":
+        print("Kaffeemaschiene wird ausgeschaltet")
+        break
+
+      case "report":
+        report()
+
+      case "replenish":
+        replenish()
+  
+      case _:
+        print("Fehlerhafte Eingabe, bitte erneut probieren\n")
+        continue
 
   
   
