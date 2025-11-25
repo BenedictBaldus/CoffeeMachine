@@ -203,6 +203,7 @@ def einlesen():
               reader = csv.DictReader(csvfile)
               for row in reader:
                 #print(row) 
+                
                 if row["ressource"] == "Wasser":
                   ressources["Wasser"] = int(row["quantity"])
                   #water = int(row["quantity"])
