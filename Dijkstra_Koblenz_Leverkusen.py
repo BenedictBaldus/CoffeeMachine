@@ -10,5 +10,8 @@ strecke = {
 
 print (strecke['KO']["PR"])
 
+for start, ziel_dict in strecke.items():
+    for ziel, entfernung in ziel_dict.items():
+        print(start, ziel, entfernung)
 
 
