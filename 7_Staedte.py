@@ -18,7 +18,9 @@ best_distance = float("inf")
 # Wir fixieren Stadt 0 als Startpunkt
 for perm in itertools.permutations(cities[1:]):
     route = (0,) + perm + (0,)
-    d = sum(dist[route[i]][route[i+1]] for i in range(len(route) - 1))
+    d = 0
+    for i in range(len(route) - 1):
+        d += dist[route[i]][route[i+1]]
 
     if d < best_distance:
         best_distance = d
