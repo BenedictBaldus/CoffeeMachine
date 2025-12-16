@@ -5,16 +5,14 @@ strecke = {
     'MG': {'LEV':83},
     'BG': {'LEV':24},
     'OL': {'BG':64},
-    'LEV': {'':0}
-         }
+    'LEV': {} 
+}
 
 start = "KO"
-
 
 unvisited = set()
 for node in strecke:
     unvisited.add(node)
-
 
 dist = {}
 prev = {}
@@ -37,16 +35,15 @@ while len(unvisited) > 0:
     unvisited.remove(current)
 
     for neighbor in strecke[current]:
-        if neighbor in unvisited:   
+        if neighbor in unvisited:
             new_dist = dist[current] + strecke[current][neighbor]
             if dist[neighbor] is None or new_dist < dist[neighbor]:
                 dist[neighbor] = new_dist
                 prev[neighbor] = current
 
-
+print("Unvisited:", unvisited)
 print("Distanzen:", dist)
 print("Vorgänger:", prev)
-
 
 ziel = "LEV"
 path = []
