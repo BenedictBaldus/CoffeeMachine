@@ -8,10 +8,12 @@ strecke = {
     'LEV': {}
          }
 
-print (strecke['KO']["PR"])
 
-for start, ziel_dict in strecke.items():
-    for ziel, entfernung in ziel_dict.items():
-        print(start, ziel, entfernung)
+def Dij(strecke,start):
+    #for start, ziel_dict in strecke.items():
+        #for ziel, entfernung in ziel_dict.items():
+            #print(start, ziel, entfernung)
+    print(strecke[start])
 
 
+Dij(strecke,"KO")
