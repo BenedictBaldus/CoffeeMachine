@@ -8,12 +8,25 @@ strecke = {
     'LEV': {}
          }
 
+start = "KO"
+unvisited = set ()
+for node in strecke:
+    unvisited.add(node)
 
-def Dij(strecke,start):
-    #for start, ziel_dict in strecke.items():
-        #for ziel, entfernung in ziel_dict.items():
-            #print(start, ziel, entfernung)
-    print(strecke[start])
+distanzen = {}
+for node in strecke:
+    distanzen[node] = None
+distanzen[start] = 0
 
+print(unvisited)
+print(distanzen)
 
-Dij(strecke,"KO")
+while len(unvisited)>0:
+    current = None
+    for node in unvisited:
+        if distanzen[node] is  None:
+            current = node
+    
+        print(current)
+    
+    unvisited.remove(node)
