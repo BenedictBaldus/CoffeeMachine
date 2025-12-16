@@ -9,6 +9,7 @@ strecke = {
 }
 
 start = "KO"
+ziel = "LEV"
 
 unvisited = set()
 for node in strecke:
@@ -41,20 +42,4 @@ while len(unvisited) > 0:
                 dist[neighbor] = new_dist
                 prev[neighbor] = current
 
-print("Unvisited:", unvisited)
-print("Distanzen:", dist)
-print("Vorgänger:", prev)
-
-ziel = "LEV"
-path = []
-cur = ziel
-while cur is not None:
-    path.append(cur)
-    cur = prev[cur]
-path.reverse()
-
-if path and path[0] == start:
-    print("Pfad KO -> LEV:", path)
-    print("Länge:", dist[ziel])
-else:
-    print("LEV ist von KO aus nicht erreichbar.")
+print("Länge:", dist[ziel])
